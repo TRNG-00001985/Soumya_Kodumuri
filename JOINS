@@ -1,0 +1,42 @@
+-- JOINS-----------
+ 
+create table Employees(EmployeeID int, EmployeeName varchar(20), DepartmentID int);
+
+insert into Employees values(1, "John", 1), (2, "Jane", 2),(3, "Mark", 1),(4, "Emily", 3);
+insert into Employees values(5, "Karen", 5);
+
+select * from Employees;
+
+create table Departments(DepartmentID int, DepartmentName varchar(15));
+
+insert into Departments values(1, "Sales"), (2, "HR"), (3, "IT"), (4, "Marketing");
+insert into Departments values(5, NULL);
+select * from Departments;
+
+
+create table Projects(ProjectID int, ProjectName varchar(20), DepartmentID int);
+insert into Projects values(101, "Project A", 1), (102, "Project B", 2), (103, "Project C", 3), (104, "Project D", 4), (105, "Project E", null);
+select * from Projects;
+
+
+
+-- 1. select e.EmployeeID, e.EmployeeName, e.DepartmentID, d.DepartmentName from Employees e INNER JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+
+-- 2. select * from Employees LEFT OUTER JOIN Departments on Employees.DepartmentID = Departments.DepartmentID;
+
+--  3. select * from Employees RIGHT OUTER JOIN Departments on Employees.DepartmentID = Departments.DepartmentID;
+
+-- 4. select* from Employees CROSS JOIN Projects;
+
+-- 5. select * from Employees e INNER JOIN Departments d ON e.DepartmentID > d.DepartmentID where d.DepartmentID IN (select DepartmentID from Departments where DepartmentName = "HR");
+
+
+-- 6. select p.ProjectID, p.ProjectName, p.DepartmentID, d.DepartmentName from Projects p INNER JOIN Departments d ON p.DepartmentID = d.DepartmentID;
+
+
+-- 7. select * from Employees e LEFT JOIN Departments d ON e.DepartmentID = d.DepartmentID where d.DepartmentID IS NULL;
+
+-- 8. select d.DepartmentID, d.DepartmentName from Departments d LEFT JOIN Employees e ON d.DepartmentID = e.DepartmentID where e.DepartmentID IS NULL; 
+
+-- 9. select d.DepartmentID, d.DepartmentName, count(EmployeeID) from Departments d left join Employees e ON e.DepartmentID = d.DepartmentID GROUP BY DepartmentID;
